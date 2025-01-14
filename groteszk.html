@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groteszk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nemzetiség</th>
+                <th>Szerző</th>
+                <th>Mű</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="2">Orosz</td>
+                <td>Gogol</td>
+                <td>A köpönyeg</td>
+            </tr>
+            <tr>
+                <td>Csehov</td>
+                <td>A csinovnyik halála</td>
+            </tr>
+            <tr>
+                <td>Cseh</td>
+                <td>Franz Kafka</td>
+                <td>Az átváltozás</td>
+            </tr>
+            <tr>
+                <td rowspan="2">Magyar</td>
+                <td>Örkény István</td>
+                <td>Egyperces Novellák</td>
+            </tr> 
+            <tr>
+                <td>József Attila</td>
+                <td>Klárisok</td>
+            </tr>
+            <tr>
+                <td>Svájc</td>
+                <td>Friedrich Dürrenmatt</td>
+                <td>A fizikusok</td>
+            </tr>     
+        </tbody>
+    </table>
+
+    <form id="form" action="#">
+        <label for="szarmazas">Származás:</label><br>
+        <input type="text" id="szarmazas" name="szarmazas"><br><br>
+
+        <label for="szerzo1">1. szerző:</label><br>
+        <input type="text" id="szerzo1" name="szerzo1"><br><br>
+
+        <label for="szerzo1mu">1. szerző műve:</label><br>
+        <input type="text" id="szerzo1mu" name="szerzo1mu"><br><br>
+
+        <label for="szerzo2">2. szerző:</label><br>
+        <input type="text" id="szerzo2" name="szerzo2"><br><br>
+
+        <label for="szerzo2mu">2. szerző műve:</label><br>
+        <input type="text" id="szerzo2mu" name="szerzo2mu"><br><br>
+
+        <button>Hozzáadás</button>
+    </form>
+
+</body>
+<script src="main.js"></script>
+
+</html>
