@@ -37,6 +37,7 @@ const array = [ // tömb létrehozása
 const table = document.createElement('table'); //Létrehozom a table-t
 document.body.appendChild(table);//Hozzá appendelem a body-hoz
 
+function renderTable() {
 const thead = document.createElement('thead');//Létrehozom a thead-et
 table.appendChild(thead);//Hozzá appendelem a table-hez
 
@@ -80,5 +81,9 @@ for (let element in header[0]) {//Elkezdem a for ciklust, értéketadok
     const cell5 = document.createElement('td'); // Második évszám cella
     cell5.innerHTML = array[i].mu2;//Megadom hogy mi legyen a cella értéke
     row2.appendChild(cell5);// Hozzá appendelem a sorhoz
+    }
   }
+
 }
+
+renderTable() //Meghivom a renderTable függvényt
