@@ -87,3 +87,31 @@ for (let element in header[0]) {//Elkezdem a for ciklust, értéketadok
 }
 
 renderTable() //Meghivom a renderTable függvényt
+
+const form = document.getElementById("form") //Lekérem a html form id-ját
+form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
+    const szarmazasH = document.getElementById("szarmazas")//Lekérem a html form id-ját
+    const szerzo1H = document.getElementById("szerzo1")//Lekérem a html form id-ját
+    const szerzo2H = document.getElementById("szerzo2")//Lekérem a html form id-ját
+    const szerzomu1H = document.getElementById("szerzo1mu")//Lekérem a html form id-ját
+    const szerzomu2H = document.getElementById("szerzo2mu")//Lekérem a html form id-ját
+
+    const szarmazasV = szarmazasH.value ///Eltárolom egy változóban az értéket
+    const szerzo1V = szerzo1H.value///Eltárolom egy változóban az értéket
+    const szerzo2V = szerzo2H.value///Eltárolom egy változóban az értéket
+    const szerzomu1V = szerzomu1H.value///Eltárolom egy változóban az értéket
+    const szerzomu2V = szerzomu2H.value//Eltárolom egy változóban az értéket
+
+    e.preventDefault()//Megakadályozom hogy a böngésző alapártelmezetten lefusson
+
+    const new_person = { //Létrehozok egy új elemet
+        nemzetiseg: szarmazasV, //Értéket adok
+        szerzo: szerzo1V,//Értéket adok
+        szerzo2: szerzo2V,//Értéket adok
+        mu: szerzomu1V,//Értéket adok
+        mu2: szerzomu2V//Értéket adok
+    }
+    array.push(new_person)//Hozzárakom az arrayhez az új elemet
+    table.innerHTML = ''//Üres string-et használok törlődik a táblázat
+    renderTable();//Meghivom a renderTable függvényt mégegyszer
+})
