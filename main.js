@@ -80,7 +80,7 @@ function renderTable(){//Elkezdem megirni a render függvényt
 
         tablebody.appendChild(row); //Hozzá appendelem a sort
 
-        if (element.szerzo2 && element.mu2) {//If elágazás létrehozása
+        if (element.szerzo2 && element.mu2) {//Ha az element.szerzo2 és element.mu2
             const row1 = document.createElement('tr');//Létrehozok egy tr-t
 
             const szerzo2 = document.createElement('td');//Létrehozok egy td-t
@@ -96,6 +96,19 @@ function renderTable(){//Elkezdem megirni a render függvényt
 }
 
 renderTable() //Meghivom a renderTable függvényt
+
+function ValidateField(inputElement, ErrorMessage){//Függvényt definiálunk
+    let valid = true;//A valid értéke igaz
+    if(inputElement.value === ""){//Ha az inputElement üres
+        const parentElement = inputElement.parentElement //Az inputElement szülő elemét hozzá rendeljük a parentElementhez
+        const error = parentElement.querySelector(".error"); // Megkeressük az első elemet amin rajta van az error
+        if(error.innerHTML === "") { //Ha az error innerHTML-je üres akkor megyünk bele
+            error.innerHTML = ErrorMessage; // Kiirjuk a hibaüzenetet
+        }
+        valid = false // A valid változó értékét hamisra cseréljük
+    }
+    return valid //Valid értékkel térek vissza
+}
 
 const form = document.getElementById("form") //Lekérem a html form id-ját
 form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
@@ -121,31 +134,16 @@ form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
 
     let valid = true; // A valid változó értéke igaz
 
-    if(szarmazasV === ""){ // Ha az származás mező üres
-        const parent = szarmazasH.parentElement; // Eltárolom egy változóban a származást
-        const errors = parent.querySelector(".error"); // Megkeressük az első elemet amin rajta van az error
-        if(errors != undefined) { // Ha találtunk ilyen mezőt akkor -->
-            errors.innerHTML = "A mező kitöltése kötelező!"; // Kiirjuk a hibaüzenetet
-        }
-        valid = false; // A valid változó értékét hamisra cseréljük
+    if(!ValidateField(szarmazasH, "A mező kitöltése kötelező!")){ //Ha a függvényünk hamissal tér vissza akkor kiirja az error üzenetet
+        valid = false; //A valid értéke hamis lesz
     }
 
-    if(szerzo1V === ""){ // Ha az szerző mező üres
-        const parent = szerzo1H.parentElement; // Eltárolom egy változóban a szerzőt
-        const errors = parent.querySelector(".error"); // Megkeressük az első elemet amin rajta van az error
-        if(errors != undefined) { // Ha találtunk ilyen mezőt akkor -->
-            errors.innerHTML = "A mező kitöltése kötelező!"; // Kiirjuk a hibaüzenetet
-        }
-        valid = false; // A valid változó értékét hamisra cseréljük
+    if(!ValidateField(szerzo1H, "A mező kitöltése kötelező!")){ //Ha a függvényünk hamissal tér vissza akkor kiirja az error üzenetet
+        valid = false; //A valid értéke hamis lesz
     }
 
-    if(szerzomu1V === ""){ // Ha az szerző mu mező üres
-        const parent = szerzomu1H.parentElement; // Eltárolom egy változóban a szerző muvet
-        const errors = parent.querySelector(".error"); // Megkeressük az első elemet amin rajta van az error
-        if(errors != undefined) { // Ha találtunk ilyen mezőt akkor -->
-            errors.innerHTML = "A mező kitöltése kötelező!"; // Kiirjuk a hibaüzenetet
-        }
-        valid = false; // A valid változó értékét hamisra cseréljük
+    if(!ValidateField(szerzomu1H, "A mező kitöltése kötelező!")){ //Ha a függvényünk hamissal tér vissza akkor kiirja az error üzenetet
+        valid = false; //A valid értéke hamis lesz
     }
 
 
