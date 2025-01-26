@@ -46,7 +46,7 @@ thead.appendChild(tr);//Hozzá appendelem a thead-hez
 
 for (let element in header[0]) {//Elkezdem a for ciklust, értéketadok
     const th = document.createElement('th'); // Létrehozom a th-t
-    th.innerHTML = header[0][element]; // Megadom az értéket a headerarray-ből
+    th.innerHTML = header[0][element]; // Megadom az értéket a header-ből
     tr.appendChild(th); // Hozzá appendelem a sorhoz
   }
   const tbody = document.createElement('tbody'); // Létrehozom a tbody-t
@@ -57,8 +57,8 @@ for (let element in header[0]) {//Elkezdem a for ciklust, értéketadok
     tbody.appendChild(row1); // Hozzá appendelem a tbody-hoz
 
     const cell1 = document.createElement('td'); // Név cella
-    cell1.rowSpan = 2; // Két sort fed le
     cell1.innerHTML = array[i].nemzetiseg;//Megadom hogy mi legyen a cella értéke
+    cell1.rowSpan = array[i].szerzo2 && array[i].mu2 ? 2 : 1; //Ha van második esemény, két sort fed le
     row1.appendChild(cell1); // Hozzá appendelem a sorhoz
 
     const cell2 = document.createElement('td'); // Első esemény cella
@@ -69,8 +69,9 @@ for (let element in header[0]) {//Elkezdem a for ciklust, értéketadok
     cell3.innerHTML = array[i].mu;//Megadom hogy mi legyen a cella értéke
     row1.appendChild(cell3);// Hozzá appendelem a sorhoz
 
-    const row2 = document.createElement('tr'); // Második sor az eseményhez
-    tbody.appendChild(row2);// Hozzá appendelem a tbody-hoz
+    if (array[i].szerzo2 && array[i].mu2) { //Akkor teljesül ha van szerzo2 és mu2
+        const row2 = document.createElement('tr'); // Létrehozok egy tr-t
+        tbody.appendChild(row2); // Hozzá appendelem a tbody-hoz
 
     const cell4 = document.createElement('td'); // Második esemény cella
     cell4.innerHTML = array[i].szerzo2;//Megadom hogy mi legyen a cella értéke
@@ -80,3 +81,4 @@ for (let element in header[0]) {//Elkezdem a for ciklust, értéketadok
     cell5.innerHTML = array[i].mu2;//Megadom hogy mi legyen a cella értéke
     row2.appendChild(cell5);// Hozzá appendelem a sorhoz
   }
+}
