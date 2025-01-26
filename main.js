@@ -110,6 +110,17 @@ function ValidateField(inputElement, ErrorMessage){//Függvényt definiálunk
     return valid //Valid értékkel térek vissza
 }
 
+function ValidateField2(firstElement, secondElement, ErrorMessage){ //Függvényt definiálunk
+    let valid = true //A valid értéke igaz
+    if(firstElement.value != "" && !ValidateField(secondElement, ErrorMessage)){ // Ellenőrizzük hogy a két mező közül az egyik kivan e töltve és ha igen akkor a másik mezőt validáljuk
+        valid = false //A valid értéke hamis
+    }
+    if(secondElement.value != "" && !ValidateField(firstElement, ErrorMessage)){ // Ellenőrizzük hogy a két mező közül az egyik kivan e töltve és ha igen akkor a másik mezőt validáljuk
+        valid = false //A valid értéke hamis
+    }
+    return valid //A valid értékkel térünk vissza
+}   
+
 const form = document.getElementById("form") //Lekérem a html form id-ját
 form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
     e.preventDefault()//Megakadályozom hogy a böngésző alapártelmezetten lefusson
@@ -146,13 +157,9 @@ form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
         valid = false; //A valid értéke hamis lesz
     }
 
-    if(szerzo2V != "" && !ValidateField(szerzomu2H, "A mező kitöltése kötelező!")){ //Ellenörzöm hogy az szerzo2 üres e illetve függvénnyel validálok
-        valid = false //A valid értéke hamis lesz
+    if(!ValidateField2(szerzo2H, szerzomu2H, "A mező kitöltése kötelező!")){ //Ha a függvényünk hamissal tér vissza akkor kiirja az error üzenetet
+        valid = false;//A valid értéke hamis lesz
     }
-    if(szerzomu2V != "" && !ValidateField(szerzo2H, "A mező kitöltése kötelező!")){ //Ellenörzöm hogy az szerzomu2 üres e illetve függvénnyel validálok
-        valid = false //A valid értéke hamis lesz
-    }
-
 
     if(valid){
         if(szerzo2V == "" && szerzomu2V == ""){ //Ha a szerzo2 es szerzomu2 üres akkor
