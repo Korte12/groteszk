@@ -37,59 +37,69 @@ const array = [ // tömb létrehozása
 const table = document.createElement('table'); //Létrehozom a table-t
 document.body.appendChild(table);//Hozzá appendelem a body-hoz
 
-function renderTable() {
 const thead = document.createElement('thead');//Létrehozom a thead-et
 table.appendChild(thead);//Hozzá appendelem a table-hez
 
 const tr = document.createElement('tr');//Létrehozom a tr-t
 thead.appendChild(tr);//Hozzá appendelem a thead-hez
 
+const tbody = document.createElement('tbody'); // Létrehozom a tbody-t
+table.appendChild(tbody); // Hozzá appendelem a table-hez
 
-for (let element in header[0]) {//Elkezdem a for ciklust, értéketadok
-    const th = document.createElement('th'); // Létrehozom a th-t
-    th.innerHTML = header[0][element]; // Megadom az értéket a header-ből
-    tr.appendChild(th); // Hozzá appendelem a sorhoz
-  }
-  const tbody = document.createElement('tbody'); // Létrehozom a tbody-t
-  table.appendChild(tbody); // Hozzá appendelem a table-hez
+const nemzetiseg = document.createElement('th')//Létrehozok egy th elemet
+nemzetiseg.innerHTML = "Nemzetiség" //Megadom az értékét
+tr.appendChild(nemzetiseg);//Hozzá appendelem a sorhoz
 
-  for (let i = 0; i < array.length; i++) {
-    const row1 = document.createElement('tr'); // Első sor az adott névhez
-    tbody.appendChild(row1); // Hozzá appendelem a tbody-hoz
+const szerzo = document.createElement('th')//Létrehozok egy th elemet
+szerzo.innerHTML = "Szerző"//Megadom az értékét
+tr.appendChild(szerzo)//Hozzá appendelem a sorhoz
 
-    const cell1 = document.createElement('td'); // Név cella
-    cell1.innerHTML = array[i].nemzetiseg;//Megadom hogy mi legyen a cella értéke
-    cell1.rowSpan = array[i].szerzo2 && array[i].mu2 ? 2 : 1; //Ha van második esemény, két sort fed le
-    row1.appendChild(cell1); // Hozzá appendelem a sorhoz
+const mu = document.createElement('th');//Létrehozok egy th elemet
+mu.innerHTML = "Mű"//Megadom az értékét
+tr.appendChild(mu)//Hozzá appendelem a sorhoz
 
-    const cell2 = document.createElement('td'); // Első esemény cella
-    cell2.innerHTML = array[i].szerzo;//Megadom hogy mi legyen a cella értéke
-    row1.appendChild(cell2);// Hozzá appendelem a sorhoz
+function renderTable(){//Elkezdem megirni a render függvényt
+    const tablebody = tbody;//Létrehozok egy tablebody-t aminek az értéke tbody
+    tbody.innerHTML = ''; // tbody innerHtml-je üres string
 
-    const cell3 = document.createElement('td'); // Első évszám cella
-    cell3.innerHTML = array[i].mu;//Megadom hogy mi legyen a cella értéke
-    row1.appendChild(cell3);// Hozzá appendelem a sorhoz
+    for (element of array) {//Elkezdem a for ciklust. Kiválasztom az array ,,element"-jét
+        let row = document.createElement('tr');//Létrehozok egy tr-t
 
-    if (array[i].szerzo2 && array[i].mu2) { //Akkor teljesül ha van szerzo2 és mu2
-        const row2 = document.createElement('tr'); // Létrehozok egy tr-t
-        tbody.appendChild(row2); // Hozzá appendelem a tbody-hoz
+        const nemzetisegC = document.createElement('td'); //Létrehozok egy td-t
+        nemzetisegC.innerHTML = element.nemzetiseg; //Megadom az innerHTML értékét
+        nemzetisegC.rowSpan = element.szerzo2 ? 2 : 1; // rowSpan-t vezetek be a megfelelő elrendezés érdekében
+        row.appendChild(nemzetisegC);//Hozzá appendelem a sorhoz
 
-    const cell4 = document.createElement('td'); // Második esemény cella
-    cell4.innerHTML = array[i].szerzo2;//Megadom hogy mi legyen a cella értéke
-    row2.appendChild(cell4);// Hozzá appendelem a sorhoz
+        const szerzo1 = document.createElement('td');//Létrehozok egy td-t
+        szerzo1.innerHTML = element.szerzo;//Megadom az innerHTML értékét
+        row.appendChild(szerzo1);//Hozzá appendelem a sorhoz
 
-    const cell5 = document.createElement('td'); // Második évszám cella
-    cell5.innerHTML = array[i].mu2;//Megadom hogy mi legyen a cella értéke
-    row2.appendChild(cell5);// Hozzá appendelem a sorhoz
+        const mu1 = document.createElement('td');//Létrehozok egy td-t
+        mu1.innerHTML = element.mu;//Megadom az innerHTML értékét
+        row.appendChild(mu1);//Hozzá appendelem a sorhoz
+
+        tablebody.appendChild(row); //Hozzá appendelem a sort
+
+        if (element.szerzo2 && element.mu2) {//If elágazás létrehozása
+            const row1 = document.createElement('tr');//Létrehozok egy tr-t
+
+            const szerzo2 = document.createElement('td');//Létrehozok egy td-t
+            szerzo2.innerHTML = element.szerzo2;//Megadom hogy mi legyen a cella értéke
+            row1.appendChild(szerzo2);//Hozzá appendelem a sorhoz
+
+            const mu2 = document.createElement('td');//Létrehozok egy td-t
+            mu2.innerHTML = element.mu2;//Megadom hogy mi legyen a cella értéke
+            row1.appendChild(mu2);//Hozzá appendelem a sorhoz
+            tablebody.appendChild(row1); //Hozzá appendelem a tablebody-hoz
+        }
     }
-  }
-
 }
 
 renderTable() //Meghivom a renderTable függvényt
 
 const form = document.getElementById("form") //Lekérem a html form id-ját
 form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
+    e.preventDefault()//Megakadályozom hogy a böngésző alapártelmezetten lefusson
     const szarmazasH = document.getElementById("szarmazas")//Lekérem a html form id-ját
     const szerzo1H = document.getElementById("szerzo1")//Lekérem a html form id-ját
     const szerzo2H = document.getElementById("szerzo2")//Lekérem a html form id-ját
@@ -102,8 +112,44 @@ form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
     const szerzomu1V = szerzomu1H.value///Eltárolom egy változóban az értéket
     const szerzomu2V = szerzomu2H.value//Eltárolom egy változóban az értéket
 
-    e.preventDefault()//Megakadályozom hogy a böngésző alapártelmezetten lefusson
+    const thisForm = e.currentTarget //Az aktuális form
+    const errorElements = thisForm.querySelectorAll('.error') //Errorokat eltárolom egy változóban
 
+    for(const i of errorElements){ //Végigmegyek az errorokon és "" ra állitom az értéküket
+        i.innerHTML = ""
+    }
+
+    let valid = true; // A valid változó értéke igaz
+
+    if(szarmazasV === ""){ // Ha az származás mező üres
+        const parent = szarmazasH.parentElement; // Eltárolom egy változóban a származást
+        const errors = parent.querySelector(".error"); // Megkeressük az első elemet amin rajta van az error
+        if(errors != undefined) { // Ha találtunk ilyen mezőt akkor -->
+            errors.innerHTML = "A mező kitöltése kötelező!"; // Kiirjuk a hibaüzenetet
+        }
+        valid = false; // A valid változó értékét hamisra cseréljük
+    }
+
+    if(szerzo1V === ""){ // Ha az szerző mező üres
+        const parent = szerzo1H.parentElement; // Eltárolom egy változóban a szerzőt
+        const errors = parent.querySelector(".error"); // Megkeressük az első elemet amin rajta van az error
+        if(errors != undefined) { // Ha találtunk ilyen mezőt akkor -->
+            errors.innerHTML = "A mező kitöltése kötelező!"; // Kiirjuk a hibaüzenetet
+        }
+        valid = false; // A valid változó értékét hamisra cseréljük
+    }
+
+    if(szerzomu1V === ""){ // Ha az szerző mu mező üres
+        const parent = szerzomu1H.parentElement; // Eltárolom egy változóban a szerző muvet
+        const errors = parent.querySelector(".error"); // Megkeressük az első elemet amin rajta van az error
+        if(errors != undefined) { // Ha találtunk ilyen mezőt akkor -->
+            errors.innerHTML = "A mező kitöltése kötelező!"; // Kiirjuk a hibaüzenetet
+        }
+        valid = false; // A valid változó értékét hamisra cseréljük
+    }
+
+
+    if(valid){
     const new_person = { //Létrehozok egy új elemet
         nemzetiseg: szarmazasV, //Értéket adok
         szerzo: szerzo1V,//Értéket adok
@@ -112,6 +158,7 @@ form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
         mu2: szerzomu2V//Értéket adok
     }
     array.push(new_person)//Hozzárakom az arrayhez az új elemet
-    table.innerHTML = ''//Üres string-et használok törlődik a táblázat
+    thisForm.reset()//Üres string-et használok törlődik a táblázat
     renderTable();//Meghivom a renderTable függvényt mégegyszer
+    }
 })
