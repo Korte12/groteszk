@@ -146,17 +146,36 @@ form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
         valid = false; //A valid értéke hamis lesz
     }
 
+    if(szerzo2V != "" && !ValidateField(szerzomu2H, "A mező kitöltése kötelező!")){ //Ellenörzöm hogy az szerzo2 üres e illetve függvénnyel validálok
+        valid = false //A valid értéke hamis lesz
+    }
+    if(szerzomu2V != "" && !ValidateField(szerzo2H, "A mező kitöltése kötelező!")){ //Ellenörzöm hogy az szerzomu2 üres e illetve függvénnyel validálok
+        valid = false //A valid értéke hamis lesz
+    }
+
 
     if(valid){
-    const new_person = { //Létrehozok egy új elemet
-        nemzetiseg: szarmazasV, //Értéket adok
-        szerzo: szerzo1V,//Értéket adok
-        szerzo2: szerzo2V,//Értéket adok
-        mu: szerzomu1V,//Értéket adok
-        mu2: szerzomu2V//Értéket adok
-    }
+        if(szerzo2V == "" && szerzomu2V == ""){ //Ha a szerzo2 es szerzomu2 üres akkor
+        const new_person = { //Létrehozok egy új elemet
+            nemzetiseg: szarmazasV, //Értéket adok
+            szerzo: szerzo1V,//Értéket adok
+            mu: szerzomu1V,//Értéket adok
+        }
     array.push(new_person)//Hozzárakom az arrayhez az új elemet
+
+    }
+    else {
+        const new_person = { //Létrehozok egy új elemet
+            nemzetiseg: szarmazasV, //Értéket adok
+            szerzo: szerzo1V,//Értéket adok
+            szerzo2: szerzo2V,//Értéket adok
+            mu: szerzomu1V,//Értéket adok
+            mu2: szerzomu2V//Értéket adok
+        }
+    array.push(new_person)//Hozzárakom az arrayhez az új elemet
+    }
+}
     thisForm.reset()//Üres string-et használok törlődik a táblázat
     renderTable();//Meghivom a renderTable függvényt mégegyszer
-    }
+
 })
