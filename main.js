@@ -65,6 +65,10 @@ table.appendChild(tbody); // Hozzá appendelem a table-hez
 
 generateHeader(header) //Meghivom a függvényt
 
+/**
+ * Ezzel a fügvénnyel a táblázatunkat hozzuk létre
+ * 
+ */
 function renderTable(data){//Elkezdem megirni a render függvényt
     const tablebody = tbody;//Létrehozok egy tablebody-t aminek az értéke tbody
     tbody.innerHTML = ''; // tbody innerHtml-je üres string
@@ -104,6 +108,10 @@ function renderTable(data){//Elkezdem megirni a render függvényt
 
 renderTable(array) //Meghivom a renderTable függvényt és az array paramétert fogja kapni
 
+/**
+ * Ezzel a függvénnyel azt ellenőrizzük hogy egy adott input mező üres-e és ha igen akkor hibaüzenetet jelenit meg
+ * 
+ */
 function ValidateField(inputElement, ErrorMessage){//Függvényt definiálunk
     let valid = true;//A valid értéke igaz
     if(inputElement.value === ""){//Ha az inputElement üres
@@ -116,6 +124,10 @@ function ValidateField(inputElement, ErrorMessage){//Függvényt definiálunk
     }
     return valid //Valid értékkel térek vissza
 }
+/**
+ * Ezzel a függvénnyel ellenőrizzük két mező értékét és ha barmelyik üres akkor hibaüzenetet jelenit meg
+ * 
+ */
 
 function ValidateField2(firstElement, secondElement, ErrorMessage){ //Függvényt definiálunk
     let valid = true //A valid értéke igaz
@@ -127,7 +139,10 @@ function ValidateField2(firstElement, secondElement, ErrorMessage){ //Függvény
     }
     return valid //A valid értékkel térünk vissza
 }
-
+/**
+ * Ezzel a függvénnyel létrehozzuk táblázatunk fejlécét
+ * 
+ */
 function generateHeader(headerR){ //Függvényt definiálunk
     const thead = document.createElement('thead'); //Létrehozok egy thead elemet
     table.appendChild(thead);//Hozzá appendelem a táblázathoz
@@ -140,6 +155,10 @@ function generateHeader(headerR){ //Függvényt definiálunk
         }
      
     }
+/**
+ * Ezzel a függvénnyel létrehozzuk a formunkat
+ * 
+ */
 
     function generateForm(formF){  //Függvényt definiálunk
         const form = document.createElement('form') //Létrehozom a formot
