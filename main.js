@@ -65,7 +65,7 @@ table.appendChild(tbody); // Hozzá appendelem a table-hez
 
 generateHeader(header) //Meghivom a függvényt
 
-renderTable(array) //Meghivom a renderTable függvényt és az array paramétert fogja kapni
+renderTable(array, tbody) //Meghivom a renderTable függvényt és az array paramétert fogja kapni
 
 const form = document.getElementById("form") //Lekérem a html form id-ját
 form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
@@ -130,5 +130,5 @@ form.addEventListener('submit', function(e){//Eseménykezelőt adok a form-hoz
     }
 }
     thisForm.reset()//Üres string-et használok törlődik a táblázat
-    renderTable(array);//Meghivom a renderTable függvényt mégegyszer és az array paramétert fogja kapni
+    renderTable(array,tbody);//Meghivom a renderTable függvényt mégegyszer és az array paramétert fogja kapni
 })

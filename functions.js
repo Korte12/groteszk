@@ -2,9 +2,7 @@
  * Ezzel a fügvénnyel a táblázatunkat hozzuk létre
  * 
  */
-function renderTable(data){//Elkezdem megirni a render függvényt
-    
-    const tablebody = tbody;//Létrehozok egy tablebody-t aminek az értéke tbody
+function renderTable(data, tbody){//Elkezdem megirni a render függvényt
     tbody.innerHTML = ''; // tbody innerHtml-je üres string
 
     for (element of data) {//Elkezdem a for ciklust. Kiválasztom az element-ből a datát
@@ -23,7 +21,7 @@ function renderTable(data){//Elkezdem megirni a render függvényt
         mu1.innerHTML = element.mu;//Megadom az innerHTML értékét
         row.appendChild(mu1);//Hozzá appendelem a sorhoz
 
-        tablebody.appendChild(row); //Hozzá appendelem a sort
+        tbody.appendChild(row); //Hozzá appendelem a sort
 
         if (element.szerzo2 && element.mu2) {//Ha az element.szerzo2 és element.mu2
             const row1 = document.createElement('tr');//Létrehozok egy tr-t
@@ -35,7 +33,7 @@ function renderTable(data){//Elkezdem megirni a render függvényt
             const mu2 = document.createElement('td');//Létrehozok egy td-t
             mu2.innerHTML = element.mu2;//Megadom hogy mi legyen a cella értéke
             row1.appendChild(mu2);//Hozzá appendelem a sorhoz
-            tablebody.appendChild(row1); //Hozzá appendelem a tablebody-hoz
+            tbody.appendChild(row1); //Hozzá appendelem a tablebody-hoz
         }
     }
 }
